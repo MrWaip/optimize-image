@@ -1,8 +1,7 @@
 declare module '*?optimized' {
-	const value: {
-		webp?: string;
-		avif?: string;
-		fallback: string;
-	};
+	import type { ComponentType, SvelteComponent } from 'svelte';
+	import type { HTMLImgAttributes } from 'svelte/elements';
+
+	const value: ComponentType<SvelteComponent<HTMLImgAttributes>>;
 	export default value;
 }

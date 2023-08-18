@@ -76,29 +76,40 @@ export const imageOptimizerPlugin = (): Plugin[] => {
 				if (!isIdForOptimization(id)) return;
 
 				// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-				return resolveId(id, importer!);
+				const absolutePath = resolveId(id, importer!);
+				const [imagePath] = absolutePath.split('?');
+				return imagePath.replace('.svelte', '') + '.svelte?optimized';
 			},
 			async load(id) {
 				if (!isIdForOptimization(id)) return;
 
-				const unwrappedId = id.replace(pattern, '');
+				const unwrappedId = id.replace(pattern, '').replace('.svelte', '');
 
-				if (!isProd || isSsr) {
-					return {
-						code: `import fallback from "${unwrappedId}";` + `export default { fallback };`,
-						map: null
-					};
-				}
-
+				const original = JSON.stringify(unwrappedId);
+				const fallback = JSON.stringify(unwrappedId + '?fallback');
 				const webp = JSON.stringify(unwrappedId + '?webp');
 				const avif = JSON.stringify(unwrappedId + '?avif');
-				const fallback = JSON.stringify(unwrappedId + '?fallback');
+
+				if (!isProd || isSsr) {
+					return (
+						`<script lang="ts">` +
+						`import fallback from ${original};` +
+						`import Picture from '$lib/Picture.svelte';` +
+						`const src = {fallback};` +
+						`</script>` +
+						`<Picture {src} {...$$restProps} />`
+					);
+				}
 
 				return (
+					`<script lang="ts">` +
 					`import webp from ${webp};` +
 					`import avif from ${avif};` +
 					`import fallback from ${fallback};` +
-					`export default {webp, avif, fallback};`
+					`import Picture from '$lib/Picture.svelte';` +
+					`const src = {webp, avif, fallback};` +
+					`</script>` +
+					`<Picture {src} {...$$restProps}  />`
 				);
 			}
 		}

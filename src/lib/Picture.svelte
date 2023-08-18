@@ -27,7 +27,7 @@
 		<source srcset={sources.webp} type="image/webp" />
 	{/if}
 
-	<img src={sources.fallback} alt="" />
+	<img src={sources.fallback} alt="" decoding="async" loading="lazy" {...$$restProps} />
 </picture>
 
 <style>

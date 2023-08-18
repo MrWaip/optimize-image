@@ -1,7 +1,8 @@
 <script lang="ts">
+	import Picture from '$lib/Picture.svelte';
 	import Source from '../images/source.png';
 	import Image from '../images/source.png?optimized';
-	import Picture from './Picture.svelte';
+
 </script>
 
 <div class="container">
@@ -14,8 +15,9 @@
 	</div>
 
 	<div>
-		<Picture src={Image} />
+		<Image /> 
 
+		
 		<div>
 			Optimized
 		</div>

@@ -1,0 +1,1 @@
+<script lang="ts">import fallback from /Users/klobkov/code/optimize-image/src/images/source.png;import Picture from '$lib/Picture.svelte';const src = {fallback};</script><Picture {src} {...$$restProps} />
