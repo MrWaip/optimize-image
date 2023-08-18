@@ -4,15 +4,27 @@
 	import Picture from './Picture.svelte';
 </script>
 
-<div>
-	<Picture src={Image} />
+<div class="container">
+	<div>
+		<Picture src={Source} />
 
-	<Picture src={Source} />
+		<div>
+			Original
+		</div>
+	</div>
+
+	<div>
+		<Picture src={Image} />
+
+		<div>
+			Optimized
+		</div>
+	</div>
 </div>
 
 <style>
-	div {
+	.container {
 		display: flex;
-		width: 900px;
+		gap: 1rem;
 	}
 </style>
