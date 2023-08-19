@@ -1,16 +1,21 @@
 import { extname } from 'node:path';
 import sharp from 'sharp';
 
-export type Extension = '.png' | '.avif' | '.webp';
+export type Extension = '.png' | '.avif' | '.webp' | '.jpeg' | '.jpg';
 
 export const SUFFIX = '-compressed';
 
-export const imagesRegex = new RegExp(`(?<!${SUFFIX})\\.(png)$`);
+export const imagesRegex = new RegExp(`(?<!${SUFFIX})\\.(png|jpg|jpeg)$`);
+
+const JPEG_TRANSFORMER = () =>
+	sharp().jpeg({ progressive: true, quality: 80, optimiseCoding: true });
 
 export const TRANSFORMERS: Record<Extension, () => sharp.Sharp> = {
 	'.png': () => sharp().png({ quality: 70, effort: 7, compressionLevel: 6 }),
 	'.avif': () => sharp().avif({ quality: 60, effort: 3 }),
-	'.webp': () => sharp().webp()
+	'.webp': () => sharp().webp(),
+	'.jpeg': JPEG_TRANSFORMER,
+	'.jpg': JPEG_TRANSFORMER
 };
 
 const EXTENSIONS: Extension[] = ['.avif', '.webp'];
