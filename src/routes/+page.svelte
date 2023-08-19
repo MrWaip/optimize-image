@@ -2,6 +2,7 @@
 	import Picture from '$lib/Picture.svelte';
 	import Source from '../images/source1.png';
 	import Image from '../images/source1.png?optimized';
+	import JpegImg from '../images/big-jpeg.jpg?optimized';
 
 </script>
 
@@ -20,6 +21,15 @@
 		
 		<div>
 			Optimized
+		</div>
+	</div>
+
+	<div>
+		<JpegImg /> 
+
+		
+		<div>
+			Jpeg Optimized
 		</div>
 	</div>
 </div>
