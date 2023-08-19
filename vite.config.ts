@@ -1,6 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
-import { imageOptimizerPlugin } from './imageOptimizerPlugin';
+import { imageOptimizerPlugin } from './optimizer/imageOptimizerPlugin';
 
 export default defineConfig({
 	plugins: [

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Picture from '$lib/Picture.svelte';
-	import Source from '../images/source.png';
-	import Image from '../images/source.png?optimized';
+	import Source from '../images/source1.png';
+	import Image from '../images/source1.png?optimized';
 
 </script>
 
